@@ -1,0 +1,45 @@
+Options -Indexes
+
+<FilesMatch "\.env$">
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "\.json$">
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "\.lock$">
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "\.sql$">
+  Deny from all
+</FilesMatch>
+
+RewriteEngine On
+
+RewriteRule ^login/?$ ./src/Views/login.php
+
+RewriteRule ^user/add/?$ ./src/Views/adduser.php
+
+RewriteRule ^posts/?$ ./src/Views/posts.php
+
+RewriteRule ^post/add/?$ ./src/Views/addpost.php
+
+RewriteRule ^post/show/([0-9]+)/?$ ./src/Views/post.php?id=$1
+
+RewriteRule ^adduser/?$ ./src/requests/adduser.php
+
+RewriteRule ^makelogin/?$ ./src/requests/login.php
+
+RewriteRule ^captcha/?$ ./src/requests/captcha.php
+
+RewriteRule ^logout/?$ ./src/requests/logout.php
+
+RewriteRule ^addpost/?$ ./src/requests/addpost.php
+
+RewriteRule ^removepost/([0-9]+)/?$ ./src/requests/removepost.php?id=$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./src/Views/notfound.php
